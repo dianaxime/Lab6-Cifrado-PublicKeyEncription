@@ -1,2 +1,17 @@
 # Lab6-Cifrado-PublicKeyEncription
 Curso Cifrado de Información
+
+
+### Requisitos
+Instalar las siguientes librerias
+
+```pip install pycryptodome```
+
+
+### Ejecución
+Para parte Implementación con librería RSA ejecutar ``` python parte2Libreria.py```
+
+
+
+### Demo Implementación con librería RSA
+[Video](https://youtu.be/tQ3SxSXDdf0)
