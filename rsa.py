@@ -1,11 +1,14 @@
+'''
+Maria Jose Castro 181202
+Diana de Leon 18607
+Camila Gonzalez 18398
+Maria Ines Vasquez 18250
+''' 
+
 #!/usr/bin/python
 from sys import argv
-# from potmod import potmod
-# from gcd import gcd, egcd
-# from randprime import rprime, pickone, inversa
 import math
 from random import choice
-# from Crypto import *
 from Crypto.Util import *
 from Crypto.Util.number import getPrime
 from Crypto.Random import get_random_bytes
@@ -20,23 +23,9 @@ def D(c, private):
     print(c, private)
     return c ** private[0] % private[1]
 
-# Codigo extraido de http://pastebin.com/ypg2PXt2
-# Convierte un string en un numero
-def msg2num(s):
-    n = 0
-    for c in s:
-        n <<= 8
-        n += ord(c)
-    return n
-
-# Convierte un numero en un string
-def num2msg(n):
-    s = []
-    while n > 0:
-        s.insert(0, chr(n & 255))
-        n >>= 8
-    return ''.join(s)
-
+#Aqui utilizamos el mensaje y la llave publica
+#para poder cifrar el mensaje, se recorre letra por letra
+#Convertimos cada letra en su numero correspondiente a ASCII
 def cifrar(m, public):
     print('mensaje',m)
     chipertext = ''
@@ -47,13 +36,16 @@ def cifrar(m, public):
     print('texto cifrado', chipertext)
     return chipertext
  
+#Aqui utilizamos el mensaje y la llave privada
+#para poder descifrar el mensaje, se recorre letra por letra
+#Convertimos cada letra en su numero correspondiente a ASCII 
 def decifrar(c, private):
     mensaje = ''
     for i in c:
         mensaje += chr(D(ord(i), private))
     return mensaje
 
-
+#Codigo visto en ejemplo de clase
 def get_coprime(N):
     coprimes = []
     for number in range(1, N+1):
@@ -65,7 +57,7 @@ def get_coprime(N):
             coprimes.append(number)
     return coprimes
 
-
+#Codigo visto en ejemplo de clase
 def get_e(list_1, list_2):
     list_e = []
     for element in list_1:
@@ -75,6 +67,8 @@ def get_e(list_1, list_2):
 
 # Fin de codigo extraido
 
+#Gerera llave a apattir del largo
+#y la escribe en los archivos
 def arch_key(size, name):
     (publica, privada) = key_gen(size)
     pub = open(name+'pub.key', 'w')
@@ -84,12 +78,14 @@ def arch_key(size, name):
         priv.write(str(privada[i])+'\n')
     return
 
+#Lee la llave de los archivos
 def get_key(archivo):
     f = open(archivo, 'r')
     e = int(f.readline())
     n = int(f.readline())
     return (e, n)
 
+#ESte genera el P, Q  y genera el E y D
 def key_gen(size):
     p = getPrime(5,randfunc=get_random_bytes)
     print(p)
