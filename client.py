@@ -9,11 +9,10 @@ publicServ = rsa.get_key('servpub.key')
 privateCli = rsa.get_key('clipriv.key')
 while True:
     mensaje = input(" Ingresa Mensaje: ")
-    mensaje = bytes(mensaje, 'utf-8')
     publicServ = rsa.get_key('servpub.key')
-    s.send(str(rsa.E(mensaje, publicServ)))
+    s.send(bytes(rsa.cifrar(mensaje, publicServ),'utf-8'))
     print("Mensaje encriptado enviado: %s" %
-          (str(rsa.E(mensaje, publicServ))))
+          (str(rsa.cifrar(mensaje, publicServ))))
     if mensaje == "quit":
         break
 

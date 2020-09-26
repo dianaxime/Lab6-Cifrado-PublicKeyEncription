@@ -14,8 +14,8 @@ while True:
       recibido = sc.recv(1024)  
       if recibido == "quit":  
          break        
-      print("Mensaje Encriptado Recibido: ", recibido)
-      print("Mensaje Desencriptado: %s" %(rsa.decifrar(rsa.D(int(recibido), private))))
+      print("Mensaje Encriptado Recibido: ", recibido.decode('utf-8'))
+      print("Mensaje Desencriptado: %s" %(rsa.decifrar(recibido.decode('utf-8'), private)))
       sc.send(recibido)  
   
 print("adios")  

@@ -13,10 +13,11 @@ from Crypto.Random import get_random_bytes
 MMI = lambda A, n,s=1,t=0,N=0: (n < 2 and t%N or MMI(n, A%n, t, s-A//n*t, N or n),-1)[n<1]
 
 def E(m, public):
-    print(E, public)
+    print(m, public)
     return m ** public[0] % public[1]
 
 def D(c, private):
+    print(c, private)
     return c ** private[0] % private[1]
 
 # Codigo extraido de http://pastebin.com/ypg2PXt2
@@ -36,22 +37,21 @@ def num2msg(n):
         n >>= 8
     return ''.join(s)
 
-def cifrar(m):
-    print(m)
-    chipertext = 0
+def cifrar(m, public):
+    print('mensaje',m)
+    chipertext = ''
     for c in m:
-        print(c)
-        chipertext <<= 8
-        chipertext += ord(c)
-    print(chipertext)
+        print('c',c)
+        #chipertext <<= 8
+        chipertext += chr(E(ord(c), public))
+    print('texto cifrado', chipertext)
     return chipertext
  
-def decifrar(c):
-    mensaje = []
-    while c > 0:
-        mensaje.insert(0, chr(c & 255))
-        c >>= 8
-    return ''.join(mensaje)
+def decifrar(c, private):
+    mensaje = ''
+    for i in c:
+        mensaje += chr(D(ord(i), private))
+    return mensaje
 
 
 def get_coprime(N):
