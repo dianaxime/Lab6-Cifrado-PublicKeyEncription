@@ -9,6 +9,13 @@ Instalar las siguientes librerias
 
 
 ### Ejecución
+Para la parte de Implementación sin librería RSA ejecutar
+
+```shell
+$ python server.py
+$ python client.py
+```
+
 Para parte Implementación con librería RSA ejecutar ``` python parte2Libreria.py```
 
 ### Demo Implementación de RSA sin Librerias
