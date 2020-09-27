@@ -16,24 +16,24 @@ from Crypto.Random import get_random_bytes
 MMI = lambda A, n,s=1,t=0,N=0: (n < 2 and t%N or MMI(n, A%n, t, s-A//n*t, N or n),-1)[n<1]
 
 def E(m, public):
-    print(m, public)
+    #print(m, public)
     return m ** public[0] % public[1]
 
 def D(c, private):
-    print(c, private)
+    #print(c, private)
     return c ** private[0] % private[1]
 
 #Aqui utilizamos el mensaje y la llave publica
 #para poder cifrar el mensaje, se recorre letra por letra
 #Convertimos cada letra en su numero correspondiente a ASCII
 def cifrar(m, public):
-    print('mensaje',m)
+    #print('mensaje',m)
     chipertext = ''
     for c in m:
-        print('c',c)
+        #print('c',c)
         #chipertext <<= 8
         chipertext += chr(E(ord(c), public))
-    print('texto cifrado', chipertext)
+    #print('texto cifrado', chipertext)
     return chipertext
  
 #Aqui utilizamos el mensaje y la llave privada
@@ -88,9 +88,9 @@ def get_key(archivo):
 #ESte genera el P, Q  y genera el E y D
 def key_gen(size):
     p = getPrime(5,randfunc=get_random_bytes)
-    print(p)
+    print("P", p)
     q = getPrime(5,randfunc=get_random_bytes)
-    print(q)
+    print("Q", q)
     n = p * q
     phin = (p-1) * (q-1)
     d = -1
@@ -101,4 +101,6 @@ def key_gen(size):
             if math.gcd(phin, e) == 1:
                 break
         d = MMI(e, phin)
+    print("D", d)
+    print("E", e)
     return ((e, n), (d, n))
